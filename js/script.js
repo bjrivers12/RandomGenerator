@@ -17,7 +17,7 @@ function randomColor() {
 }
 
 //genertates array of random number that don't repeat the same length of the given array
-function getRandomArray(array) {
+function getRandomQuote(array) {
   let order = [];
   let randomNumber = Math.floor((Math.random() * array.length));
   order.push(randomNumber);
@@ -37,9 +37,10 @@ function addToConsole() {
   }
 }
 
-//set the first array order and set the position to 0
-let order = getRandomArray(quotes);
+//variables to hold quote orders
+let order = getRandomQuote(quotes);
 let position = 0;
+
 
 //print a quote
 function printQuote() {
@@ -56,20 +57,38 @@ function printQuote() {
     document.getElementById('quote-box').innerHTML = report;
     position += 1;
     addToConsole();
-  } else if (position === order.length) {
+  } else {
     position = 0;
-    order = getRandomArray(quotes);
-    color = randomColor();
-    document.body.style.background = color;
-    document.getElementById("loadQuote").style.background = color;
-    value = order[position];
-    selectedQuotes = quotes[value];
-    report = '<p class="quote">' + selectedQuotes.words + '</p>';
-    report += '<p class="source">' + selectedQuotes.source;
-    report += '<span class="citation">' + selectedQuotes.citation + '</span>';
-    report += '<span class="year">' + selectedQuotes.year + '</span></p>';
-    document.getElementById('quote-box').innerHTML = report;
-    addToConsole();
+    let oldLast = order[order.length - 1];
+    order = getRandomQuote(quotes);
+    if (order[0] === oldLast) {
+      color = randomColor();
+      document.body.style.background = color;
+      document.getElementById("loadQuote").style.background = color;
+      position = 1;
+      value = order[position];
+      selectedQuotes = quotes[value];
+      report = '<p class="quote">' + selectedQuotes.words + '</p>';
+      report += '<p class="source">' + selectedQuotes.source;
+      report += '<span class="citation">' + selectedQuotes.citation + '</span>';
+      report += '<span class="year">' + selectedQuotes.year + '</span></p>';
+      document.getElementById('quote-box').innerHTML = report;
+      position += 1;
+      addToConsole();
+    } else {
+      color = randomColor();
+      document.body.style.background = color;
+      document.getElementById("loadQuote").style.background = color;
+      value = order[position];
+      selectedQuotes = quotes[value];
+      report = '<p class="quote">' + selectedQuotes.words + '</p>';
+      report += '<p class="source">' + selectedQuotes.source;
+      report += '<span class="citation">' + selectedQuotes.citation + '</span>';
+      report += '<span class="year">' + selectedQuotes.year + '</span></p>';
+      document.getElementById('quote-box').innerHTML = report;
+      position += 1;
+      addToConsole();
+    }
   }
 }
 
