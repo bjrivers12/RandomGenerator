@@ -3,7 +3,7 @@ const quotes = [{
         source: '-Paulo Coelho',
         citation: "The Alchemist",
         year: 1988,
-        tags: "Adventure Fiction"
+        tags: "Adventure Fiction Novel"
     },
     {
         words: "There is no greater agony than bearing an untold story inside you.",
